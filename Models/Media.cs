@@ -31,6 +31,7 @@ namespace Vodda.Models
         [Required]
         public Supplier Supplier { get; set; }
         public string SupplierIdentifier { get; set; }
+        public string SupplierName { get; set; } // if diffrent than Media
         public string Name { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
