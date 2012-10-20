@@ -43,7 +43,7 @@ namespace Vodda.Controllers
          * Kolla update-datum. Om interval X passerat, uppdatera. Annars visa (inga API-anrop)
          * 
          * Användare söker fritext
-         * Finns exakt träff, visa.
+         * Finns exakt träff, visa. Annars sök alla API, om någon exakt träff, skapa media och uppdatera alla api.
          * 
          */
 
