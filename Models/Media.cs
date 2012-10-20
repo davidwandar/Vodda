@@ -21,6 +21,7 @@ namespace Vodda.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string CoverUrl { get; set; }
+        public DateTime Updated { get; set; }
     }
 
     public class SupplierMedia
@@ -32,7 +33,7 @@ namespace Vodda.Models
         public string SupplierIdentifier { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; }
-        public DateTime Üpdated { get; set; }
+        public DateTime Updated { get; set; }
         public string Url { get; set; }
     }
 }

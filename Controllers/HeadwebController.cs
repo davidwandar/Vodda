@@ -9,6 +9,10 @@ namespace Vodda.Controllers
 {
     public class HeadwebController : SupplierBaseController
     {
+        public HeadwebController()
+        { 
+            _supplierId = "1";
+        }
         //
         // GET: /Headweb/
 
@@ -28,11 +32,22 @@ namespace Vodda.Controllers
              *     - delete
              *   - return
              *  - search by title
+             *   + insert
              * 
              * 
              * */
             return true;
         }
 
+        /* Användare suggestsöker/väljer media
+         * Kolla update-datum. Om interval X passerat, uppdatera. Annars visa (inga API-anrop)
+         * 
+         * Användare söker fritext
+         * Finns exakt träff, visa.
+         * 
+         */
+
+       
+        
     }
 }

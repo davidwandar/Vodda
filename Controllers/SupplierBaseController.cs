@@ -9,6 +9,7 @@ namespace Vodda.Controllers
 {
     public abstract class SupplierBaseController : Controller
     {
+        protected string _supplierId; // Id from D
         public abstract bool Populate(Media media);
         
     }
