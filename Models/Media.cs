@@ -27,8 +27,12 @@ namespace Vodda.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public Supplier Supplier { get; set; }
         public string SupplierIdentifier { get; set; }
         public string Name { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Üpdated { get; set; }
+        public string Url { get; set; }
     }
 }
