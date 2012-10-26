@@ -22,7 +22,7 @@ namespace Vodda.Models
         {
         }
 
-        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Media> Medias { get; set; }
     }
 
     public class Supplier
@@ -40,6 +40,7 @@ namespace Vodda.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string CoverUrl { get; set; }
+        public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
     }
 
@@ -49,8 +50,10 @@ namespace Vodda.Models
         public int Id { get; set; }
         [Required]
         public Supplier Supplier { get; set; }
+        public Media Media { get; set; }
         public string SupplierIdentifier { get; set; }
-        public string SupplierName { get; set; } // if diffrent than Media
+        public string SupplierMediaName { get; set; } // if diffrent than Media
+        public string CoverUrl { get; set; } 
         public string Name { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
@@ -64,26 +67,37 @@ namespace Vodda.Models
                 if (sm == null)
                 { 
                     //Does not exist, add new
-
+                    this.Media = GetMedia();
+                    this.Created = DateTime.Now;
+                    
+                    db.SupplierMedias.Add(this);
+                    db.SaveChanges();
                 }
             }
                     
         }
 
-        public Supplier Supplier()
+        public Media GetMedia()
         {
             using (MediaContext db = new MediaContext())
             {
-                Supplier supplier = db.Suppliers.FirstOrDefault(s => s.Name == this.Name);
-                if (supplier == null)
+                Media media = db.Medias.FirstOrDefault(s => s.Name == this.Name);
+                if (media == null)
                 { 
                     //No such supplier, add new
-                    Supplier s = new Supplier();
-                    s.Name = this.Name;
-                    s
+                    Media m = new Media();
+                    m.Name = this.Name;
+                    m.CoverUrl = this.CoverUrl;
+                    m.Created = DateTime.Now;
 
+                    db.Medias.Add(m);
+                    db.SaveChanges();
+
+                    return m;
                 }
+                return media;
             }
+            
         }
     }
 }

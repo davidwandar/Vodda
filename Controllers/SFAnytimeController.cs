@@ -37,7 +37,16 @@ namespace Vodda.Controllers
                 m = new SupplierMedia();
                 m.Name = GetName(link.Attributes["href"].Value);
                 m.Url = "http://sfanytime.com" + link.Attributes["href"].Value;
-                list.Add(m);
+                try
+                {
+                    string coverUrl = link.ParentNode.PreviousSibling.PreviousSibling.ChildNodes["img"].Attributes["src"].Value;
+                    m.CoverUrl = coverUrl;
+                }
+                catch { }
+                
+                
+                //list.Add(m);
+                m.Put();
             }
             return;
         }
@@ -48,7 +57,7 @@ namespace Vodda.Controllers
             var document = docWeb.Load("http://sfanytime.com" + p);
             HtmlNode node = document.DocumentNode.SelectNodes("//title")[0];
 
-            return node.InnerText.Trim().Replace("- SF Anytime","").Trim();
+            return node.InnerText.Trim().Replace("- SF Anytime", "").Trim();
 
         }
     }
