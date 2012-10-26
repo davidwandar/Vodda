@@ -14,6 +14,8 @@ namespace Vodda.Models
         }
 
         public DbSet<SupplierMedia> SupplierMedias { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
     }
 
     public class MediaContext : DbContext
