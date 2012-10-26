@@ -2,10 +2,29 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 
 namespace Vodda.Models
 {
+    public class SupplierMediaContext : DbContext
+    {
+        public SupplierMediaContext() : base("DefaultConnection")
+        {
+        }
+
+        public DbSet<SupplierMedia> SupplierMedias { get; set; }
+    }
+
+    public class MediaContext : DbContext
+    {
+        public MediaContext() : base("DefaultConnection")
+        {
+        }
+
+        public DbSet<Supplier> Suppliers { get; set; }
+    }
+
     public class Supplier
     {
         [Key]
@@ -36,5 +55,35 @@ namespace Vodda.Models
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public string Url { get; set; }
+
+        public void Put()
+        {
+            using (SupplierMediaContext db = new SupplierMediaContext())
+            {
+                SupplierMedia sm = db.SupplierMedias.FirstOrDefault(s => s.Url == this.Url);
+                if (sm == null)
+                { 
+                    //Does not exist, add new
+
+                }
+            }
+                    
+        }
+
+        public Supplier Supplier()
+        {
+            using (MediaContext db = new MediaContext())
+            {
+                Supplier supplier = db.Suppliers.FirstOrDefault(s => s.Name == this.Name);
+                if (supplier == null)
+                { 
+                    //No such supplier, add new
+                    Supplier s = new Supplier();
+                    s.Name = this.Name;
+                    s
+
+                }
+            }
+        }
     }
 }
